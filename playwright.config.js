@@ -27,8 +27,6 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    trace: 'on-first-retry',
-    headless: true,
     baseURL: 'http://localhost:5173',
   },
 
