@@ -39,9 +39,15 @@ jobs:
 
       - name: Test backend
         working-directory: bloglist-backend
+        env:
+          TEST MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+          SECRET: ${{ secrets.SECRET }}
         run: npm run test
       - name: Test frontend
         working-directory: bloglist-frontend
+        env:
+          TEST MONGODB_URI: ${{ secrets.TEST_MONGODB_URI }}
+          SECRET: ${{ secrets.SECRET }}
         run: npm run test
       
       - name: Install Playwright Browsers
