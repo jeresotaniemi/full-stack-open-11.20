@@ -73,6 +73,11 @@ export default defineConfig({
      command: 'npm run start',
      url: 'http://localhost:5173',
      reuseExistingServer: !process.env.CI,
+     env: {
+      TEST_MONGODB_URI: process.env.TEST_MONGODB_URI || '',
+      SECRET: process.env.SECRET || '',
+      NODE_ENV: 'test',
+  },
   },
 });
 
