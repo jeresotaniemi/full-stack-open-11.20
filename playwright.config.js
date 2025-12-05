@@ -28,7 +28,7 @@ export default defineConfig({
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
     trace: 'on-first-retry',
-    headless: false,
+    headless: true,
     baseURL: 'http://localhost:5173',
   },
 
