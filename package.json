@@ -1,0 +1,24 @@
+{
+  "name": "osa5",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:e2e": "playwright test",
+    "test:report": "playwright show-report",
+    "start": "concurrently \"npm run start-frontend\" \"npm run start-backend\"",
+    "start-backend": "npm --prefix bloglist-backend run start:test",
+    "start-frontend": "npm --prefix bloglist-frontend run dev"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.54.2",
+    "@types/node": "^24.3.0"
+  },
+  "dependencies": {
+    "concurrently": "^9.2.1"
+  }
+}

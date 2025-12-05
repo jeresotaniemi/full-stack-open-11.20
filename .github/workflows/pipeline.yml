@@ -1,0 +1,55 @@
+name: Deployment pipeline
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches: [main]
+    types: [opened, synchronize]
+
+jobs:
+  simple_deployment_pipeline:
+    name: CI
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install backend dependencies
+        working-directory: bloglist-backend
+        run: npm install
+      - name: Install frontend dependencies
+        working-directory: bloglist-frontend
+        run: npm install
+      
+      - name: Check style for backend
+        working-directory: bloglist-backend
+        run: npm run lint
+      - name: Check style for frontend
+        working-directory: bloglist-frontend
+        run: npm run lint
+      
+      - name: Build frontend
+        working-directory: bloglist-frontend
+        run: npm run build
+
+      - name: Test backend
+        working-directory: bloglist-backend
+        run: npm run test
+      - name: Test frontend
+        working-directory: bloglist-frontend
+        run: npm run test
+      
+      - name: Install Playwright Browsers
+        run: npx playwright install --with-deps
+      - name: Run e2e tests
+        run: npm run test:e2e
+      - uses: actions/upload-artifact@v4
+        if: ${{ !cancelled() }}
+        with:
+          name: playwright-report
+          path: playwright-report/
+          retention-days: 30
