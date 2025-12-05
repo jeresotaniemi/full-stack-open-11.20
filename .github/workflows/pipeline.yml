@@ -10,7 +10,6 @@ on:
 
 jobs:
   simple_deployment_pipeline:
-    name: CI
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -45,6 +44,8 @@ jobs:
       
       - name: Install Playwright Browsers
         run: npx playwright install --with-deps
+      - name: Install root dependencies
+        run: npm install
       - name: Run e2e tests
         run: npm run test:e2e
       - uses: actions/upload-artifact@v4
